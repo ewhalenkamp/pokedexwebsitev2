@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('pokedex/', views.list, name='list'),
+    path('pokedex/<int:id>/', views.base, name='base'),
 
 ]

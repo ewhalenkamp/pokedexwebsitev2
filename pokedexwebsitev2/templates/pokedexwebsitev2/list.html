@@ -11,7 +11,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <title>Pok&eacute;dex Project v2</title>
 </head>
 
 <style>
@@ -164,7 +165,7 @@
                                     src="{% static '/img/deximages/120px-'|add:pokemon.dexnum|add:pokemon.name|add:'.png' %}"
                                     alt="{{ pokemon.id }}">
                                 {% endif %}
-                                <a href="{{ pokemon.name }}">
+                                <a href="{{ pokemon.id }}">
                                     <div class="opaquehoverlower">
                                         <div class="title text">{{ pokemon.dexnum }}</div>
                                     </div>
@@ -173,15 +174,12 @@
                     <p><a href="{{ pokemon.name }}.html"><b>{{ pokemon.name }}</b></a></p>
                     <table style="margin: auto">
                         <tr class="mini">
-                            <td><a href="https://bulbapedia.bulbagarden.net/wiki/{{ pokemon.types.type1 }}_(type)"><img
-                                        src="{% static '/img/typeicons/'|add:pokemon.types.type1|add:'.png' %}"
-                                        alt="{{ pokemon.types.type1 }}"></a>
+                            {% for type in pokemon.types %}
+                            <td><a href="https://bulbapedia.bulbagarden.net/wiki/{{ type.name }}_(type)"><img
+                                        src="{% static '/img/typeicons/'|add:type.name|add:'.png' %}"
+                                        alt="{{ type.name }}"></a>
                             </td>
-                            {% if pokemon.types.type2 != "" %}
-                            <td><a href="https://bulbapedia.bulbagarden.net/wiki/{{ pokemon.types.type2 }}_(type)"><img
-                                        src="{% static '/img/typeicons/'|add:pokemon.types.type2|add:'.png' %}"
-                                        alt="{{ pokemon.types.type2 }}"></a>
-                                {% endif %}
+                            {% endfor %}
                         </tr>
                     </table>
                 </td>
