@@ -23,7 +23,7 @@ def list(request):
         except requests.exceptions.ConnectionError:
             return HttpResponse("<p>Connection Refused</p>")
 
-    r = request.session['pokedata']
+    r = request.session['pokedata'].copy()
 
     for pokemon in r:
         pokemonid = int(pokemon['dexnum'])
@@ -42,13 +42,16 @@ def base(request, id):
     if id == 1:
         return render(request, 'pokedexwebsitev2/bulb.html')
     is_cached = ('individualdata' in request.session)
+    if is_cached:
+        if request.session['individualdata']['id'] != id:
+            is_cached = False
     pokemon = {}
 
     if not is_cached:
         try:
-            req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+id, params=request.GET)
+            req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+str(id), params=request.GET)
             r = req.json()
-            request.session['individualdata'].append(r)
+            request.session['individualdata'] = r
         except requests.exceptions.ConnectionError:
             return HttpResponse("<p>Connection Refused</p>")
     previd = 0
@@ -61,7 +64,7 @@ def base(request, id):
         nextid = 1 
     else: 
         nextid = id + 1
-
+    
     pokemon = request.session['individualdata'].copy()
 
     pokemonid = int(pokemon['dexnum'])
@@ -88,6 +91,8 @@ def base(request, id):
     for move in pokemon['possiblemoves']:
         if move['power'] == "0":
             move['power'] = "—"
+        if move['accuracy'] == "—":
+            move['accuracy'] = 0.0
 
         num = float(move['accuracy'])   
         if num != 0.0:
