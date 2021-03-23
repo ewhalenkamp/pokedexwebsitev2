@@ -46,9 +46,10 @@ def base(request, id):
 
     if not is_cached:
         try:
-            req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon', params=request.GET)
-            r = req.json()
-            request.session['pokedata'] = r
+            for i in range(973):
+                req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+str(i), params=request.GET)
+                r = req.json()
+                request.session['pokedata'].append(r)
         except requests.exceptions.ConnectionError:
             return HttpResponse("<p>Connection Refused</p>")
     previd = 0
