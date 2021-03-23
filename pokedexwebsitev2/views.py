@@ -48,6 +48,7 @@ def base(request, id):
         try:
             for i in range(973):
                 req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+str(i), params=request.GET)
+                print(i)
                 r = req.json()
                 request.session['pokedata'].append(r)
         except requests.exceptions.ConnectionError:
