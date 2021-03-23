@@ -16,7 +16,7 @@ def list(request):
 
     if not is_cached:
         try:
-            for (i=0;i<973;i+=1)
+            for i in range(973):
                 req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+str(i), params=request.GET)
                 r = req.json()
                 request.session['pokedata'].append(r)
