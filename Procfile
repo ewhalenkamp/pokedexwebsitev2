@@ -1,1 +1,1 @@
-web: gunicorn myproject.wsgi
+web: gunicorn pokedexwebsitev2.wsgi
