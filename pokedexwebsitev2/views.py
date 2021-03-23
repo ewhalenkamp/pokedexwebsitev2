@@ -14,16 +14,20 @@ def list(request):
     pokemon = {}
     r = {}
 
-    if not is_cached:
-        try:
-            req = requests.get('http://127.0.0.1:8080/api/pokemon', params=request.GET)
-            request.session['pokedata'] = req.json()
-        except requests.exceptions.ConnectionError:
-            return HttpResponse("<p>Connection Refused</p>")
+    #if not is_cached:
+    try:
+        req = requests.get('http://127.0.0.1:8080/api/pokemon', params=request.GET)
+        r = req.json()
+        for pokemon in r:
+            pokemonid = int(pokemon['dexnum'])
+            pokemon['dexinteger'] = pokemonid
+            pokemonid = int(pokemon['id'])
+            pokemon['mod5'] = ((pokemonid-1) % 5)
+        request.session['pokedata'] = r
+    except requests.exceptions.ConnectionError:
+        return HttpResponse("<p>Connection Refused</p>")
 
     r = request.session['pokedata']
-    for pokemon in r:
-        print(pokemon['name'])
 
     context = {
         'pokemonlist': r,

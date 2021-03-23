@@ -150,97 +150,45 @@
                 style="font-size:40"><br>Pok&eacute;dex</b><br><a style="font-size: 16px" href="..">Return Home</a></h1>
         <br>
         <table>
-            <tr>
+            {% for pokemon in pokemonlist %}
+            {% if pokemon.mod5 == 0 %} <tr> {% endif %}
                 <td>
-                    <div class="opaquehover"><img src="{% static '/img/deximages/120px-001Bulbasaur.png' %}"
-                            alt="Bulbasaur"><a href="Bulbasaur.html">
-                            <div class="opaquehoverlower">
-                                <div class="title text">001</div>
-                            </div>
-                        </a></div>
-                    <p><a href="Bulbasaur.html"><b>Bulbasaur</b></a></p>
+                    <div class="opaquehover">
+                        {% if pokemon.dexinteger < 10 %} <img
+                            src="{% static '/img//deximages//120px-00'|add:pokemon.dexnum|add:pokemon.name|add:'.png' %}"
+                            alt="{{ pokemon.name }}">
+                            {% elif pokemon.dexinteger < 100 %} <img
+                                src="{% static '/img/deximages/120px-0'|add:pokemon.dexnum|add:pokemon.name|add:'.png' %}"
+                                alt="{{ pokemon.name }}">
+                                {% else %} <img
+                                    src="{% static '/img/deximages/120px-'|add:pokemon.dexnum|add:pokemon.name|add:'.png' %}"
+                                    alt="{{ pokemon.id }}">
+                                {% endif %}
+                                <a href="{{ pokemon.name }}">
+                                    <div class="opaquehoverlower">
+                                        <div class="title text">{{ pokemon.dexnum }}</div>
+                                    </div>
+                                </a>
+                    </div>
+                    <p><a href="{{ pokemon.name }}.html"><b>{{ pokemon.name }}</b></a></p>
                     <table style="margin: auto">
                         <tr class="mini">
-                            <td><a href="../types/Grass.html"><img src="{% static '/img/typeicons/Grass.png' %}"
-                                        alt="Grass"></a>
+                            <td><a href="https://bulbapedia.bulbagarden.net/wiki/{{ pokemon.types.type1 }}_(type)"><img
+                                        src="{% static '/img/typeicons/'|add:pokemon.types.type1|add:'.png' %}"
+                                        alt="{{ pokemon.types.type1 }}"></a>
                             </td>
-                            <td><a href="../types/Poison.html"><img src="{% static '/img/typeicons/Poison.png' %}"
-                                        alt="Poison"></a>
-                            </td>
+                            {% if pokemon.types.type2 != "" %}
+                            <td><a href="https://bulbapedia.bulbagarden.net/wiki/{{ pokemon.types.type2 }}_(type)"><img
+                                        src="{% static '/img/typeicons/'|add:pokemon.types.type2|add:'.png' %}"
+                                        alt="{{ pokemon.types.type2 }}"></a>
+                                {% endif %}
                         </tr>
                     </table>
                 </td>
-                <td>
-                    <div class="opaquehover"><img src="{% static '/img/deximages/120px-002Ivysaur.png' %}"
-                            alt="Ivysaur"><a href="Ivysaur.html">
-                            <div class="opaquehoverlower">
-                                <div class="title text">002</div>
-                            </div>
-                        </a></div>
-                    <p><a href="Ivysaur.html"><b>Ivysaur</b></a></p>
-                    <table style="margin: auto">
-                        <tr class="mini">
-                            <td><a href="../types/Grass.html"><img src="{% static '/img/typeicons/Grass.png' %}"
-                                        alt="Grass"></a>
-                            </td>
-                            <td><a href="../types/Poison.html"><img src="{% static '/img/typeicons/Poison.png' %}"
-                                        alt="Poison"></a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <div class="opaquehover"><img src="{% static '/img/deximages/120px-003Venusaur.png' %}"
-                            alt="Venusaur"><a href="Venusaur.html">
-                            <div class="opaquehoverlower">
-                                <div class="title text">003</div>
-                            </div>
-                        </a></div>
-                    <p><a href="Venusaur.html"><b>Venusaur</b></a></p>
-                    <table style="margin: auto">
-                        <tr class="mini">
-                            <td><a href="../types/Grass.html"><img src="{% static '/img/typeicons/Grass.png' %}"
-                                        alt="Grass"></a>
-                            </td>
-                            <td><a href="../types/Poison.html"><img src="{% static '/img/typeicons/Poison.png' %}"
-                                        alt="Poison"></a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <div class="opaquehover"><img src="{% static '/img/deximages/120px-003Venusaur-Mega.png' %}"
-                            alt="Venusaur-Mega"><a href="Venusaur-Mega.html">
-                            <div class="opaquehoverlower">
-                                <div class="title text">003-M</div>
-                            </div>
-                        </a></div>
-                    <p><a href="Venusaur-Mega.html"><b>Venusaur-Mega</b></a></p>
-                    <table style="margin: auto">
-                        <tr class="mini">
-                            <td><a href="../types/Grass.html"><img src="{% static '/img/typeicons/Grass.png' %}"
-                                        alt="Grass"></a>
-                            </td>
-                            <td><a href="../types/Poison.html"><img src="{% static '/img/typeicons/Poison.png' %}"
-                                        alt="Poison"></a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td>
-                    <div class="opaquehover"><img src="{% static '/img/deximages/120px-004Charmander.png' %}"
-                            alt="Charmander"><a href="Charmander.html">
-                            <div class="opaquehoverlower">
-                                <div class="title text">004</div>
-                            </div>
-                        </a></div>
-                    <p><a href="Charmander.html"><b>Charmander</b></a></p>
-                    <table style="margin: auto">
-                        <tr class="mini">
-                            <td><a href="../types/Fire.html"><img src="{% static '/img/typeicons/Fire.png' %}"
-                                        alt="Fire"></a>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
+                {% if pokemon.mod5 == 4 %}
             </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</body>
