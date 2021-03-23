@@ -16,7 +16,7 @@ def list(request):
 
     if not is_cached:
         try:
-            req = requests.get('http://127.0.0.1:8080/api/pokemon', params=request.GET)
+            req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon', params=request.GET)
             r = req.json()
             request.session['pokedata'] = r
         except requests.exceptions.ConnectionError:
@@ -45,7 +45,7 @@ def base(request, id):
 
     if not is_cached:
         try:
-            req = requests.get('http://127.0.0.1:8080/api/pokemon', params=request.GET)
+            req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon', params=request.GET)
             r = req.json()
             request.session['pokedata'] = r
         except requests.exceptions.ConnectionError:
