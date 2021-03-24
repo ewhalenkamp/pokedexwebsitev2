@@ -1,6 +1,6 @@
 # Pokédex Website Version 2
 
-## eveloped by: Erik Halenkamp
+### Developed by: Erik Halenkamp
 
 ## About This Project:
 
