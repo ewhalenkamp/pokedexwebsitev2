@@ -1,8 +1,8 @@
 # Pokédex Website Version 2
 
-##Developed by: Erik Halenkamp
+## eveloped by: Erik Halenkamp
 
-##About This Project:
+## About This Project:
 
 This Pokédex was created as a spiritual successor to a class project I completed one year ago, in the Spring of 2020. I knew nothing of web technologies then, so I
 simply used Java in order to compile the nearly thousand files of HTML, each with algorithmically-generated code. In the year since I undertook that project, however, my
