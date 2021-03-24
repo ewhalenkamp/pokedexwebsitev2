@@ -12,6 +12,6 @@ I designed my own API based off the same Java database that allowed me to create
 project can be found [here](https://github.com/ewhalenkamp/pokemonapi). Django is used in my backend to handle the API calls, template rendering, and url routes.
 
 This project isn't perfect, certainly, and the API took a lot of optimization in order to render the main Pokédex list page within a reasonable amount of time. It's not all
-too pretty, either, considering I used the exact same stylings as the original project with little to no variation.
+too pretty, either, considering I used the exact same stylings as the original project with little to no variation. This was very much a back-end oriented project.
 
 Please check it out at https://halenkamp-pokedexv2.herokuapp.com
