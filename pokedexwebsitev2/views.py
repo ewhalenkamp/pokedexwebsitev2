@@ -41,16 +41,19 @@ def base(request, id):
     if id == 1:
         return render(request, 'pokedexwebsitev2/bulb.html')
     is_cached = ('individualdata' in request.session)
-    if is_cached:
-        if request.session['individualdata']['id'] != id:
+    if not is_cached:
+        request.session['individualdata'] = {}
+    else:
+        if str(id) not in request.session['individualdata']:
             is_cached = False
+    
     pokemon = {}
 
     if not is_cached:
         try:
             req = requests.get('https://halenkamp-pokemonapi.herokuapp.com/api/pokemon?id='+str(id), params=request.GET)
             r = req.json()
-            request.session['individualdata'] = r
+            request.session['individualdata'][str(id)] = r
         except requests.exceptions.ConnectionError:
             return HttpResponse("<p>Connection Refused</p>")
     previd = 0
@@ -64,7 +67,7 @@ def base(request, id):
     else: 
         nextid = id + 1
     
-    pokemon = request.session['individualdata'].copy()
+    pokemon = request.session['individualdata'][str(id)].copy()
 
     pokemonid = int(pokemon['dexnum'])
     pokemon['dexinteger'] = pokemonid
